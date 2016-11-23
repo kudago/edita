@@ -2,10 +2,15 @@
   "name": "edita",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/edita.js",
   "scripts": {
+    "build": "mkdir dest | browserify -t babelify src/edita.js > dest/edita.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Yura Trambitskiy",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.1"
+  }
 }
