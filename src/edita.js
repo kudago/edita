@@ -1,4 +1,4 @@
-const Text = require('./blocks/text');
+const Markdown = require('./blocks/markdown');
 const domify = require('domify');
 const events = require('events-mixin');
 
@@ -36,7 +36,7 @@ class Edita {
     }
 
     addBlock() {
-        const block = new Text;
+        const block = new Markdown;
         block.on('delete', () => this.deleteBlock(block));
         this.blocks.push(block);
         this.renderBlocks();

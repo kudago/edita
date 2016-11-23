@@ -15,6 +15,7 @@ class Block extends EventsEmitter {
             this.createSpeciticElement()
         );
         this.bindEvents();
+        this.emit('ready');
     }
 
     createContainer() {
