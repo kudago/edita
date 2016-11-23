@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/edita.js",
   "scripts": {
-    "build": "mkdir dest | browserify -t babelify src/edita.js > dest/edita.js",
+    "build": "browserify -t babelify src/edita.js > dest/edita.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Yura Trambitskiy",
@@ -14,6 +14,8 @@
     "browserify": "^13.1.1"
   },
   "dependencies": {
-    "domify": "^1.4.0"
+    "domify": "^1.4.0",
+    "events": "^1.1.1",
+    "events-mixin": "^1.3.0"
   }
 }

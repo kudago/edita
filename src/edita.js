@@ -1,17 +1,31 @@
-const Block = require('./block');
+const Text = require('./blocks/text');
+const domify = require('domify');
+const events = require('events-mixin');
 
 class Edita {
     constructor(element, options) {
         this.blocks = [];
         this.element = element;
 
-        this.actionsPanel = document.createElement('div');
-        this.element.appendChild(this.actionsPanel);
-        this.initActionsPanel();
+        this.element.appendChild(domify(`
+            <div class="edita">
+                <button class="edita-add">+</button>
+            </div>
+        `));
+        this.bindEvents();
 
-        this.content = document.createElement('div');
+        this.content = domify(`
+            <div class="edita-content"></div>
+        `);
         this.element.appendChild(this.content);
         this.renderBlocks();
+    }
+
+    bindEvents() {
+        this.events = events(this.element, this);
+        this.events.bind({
+            'click .edita-add': 'addBlock',
+        });
     }
 
     renderBlocks() {
@@ -22,21 +36,15 @@ class Edita {
         });
     }
 
-    initActionsPanel() {
-        var self = this;
-
-        var addButton = document.createElement('button');
-        addButton.textContent = '+';
-        addButton.addEventListener('click', () => {
-            var block = new Block;
-            self.addBlock(block);
-        });
-
-        this.actionsPanel.appendChild(addButton);
+    addBlock() {
+        const block = new Text;
+        block.on('delete', () => this.deleteBlock(block));
+        this.blocks.push(block);
+        this.renderBlocks();
     }
 
-    addBlock(block) {
-        this.blocks.push(block);
+    deleteBlock(block) {
+        this.blocks = this.blocks.filter(b => b != block);
         this.renderBlocks();
     }
 }
