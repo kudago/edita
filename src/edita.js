@@ -32,7 +32,7 @@ class Edita {
         this.content.innerHTML = '';
 
         this.blocks.forEach(b => {
-            this.content.appendChild(b.getInterface());
+            this.content.appendChild(b.getContainer());
         });
     }
 

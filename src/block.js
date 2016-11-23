@@ -46,7 +46,7 @@ class Block extends EventsEmitter {
         this.emit('delete');
     }
 
-    getInterface() {
+    getContainer() {
         return this.container;
     }
 }
