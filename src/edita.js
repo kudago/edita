@@ -1,4 +1,4 @@
-var Block = require('./block');
+const Block = require('./block');
 
 class Edita {
     constructor(element, options) {
@@ -15,11 +15,11 @@ class Edita {
     }
 
     renderBlocks() {
-        var markup = this.blocks.map(function(b) {
-            return b.renderInterface();
-        }).join('');
+        this.content.innerHTML = '';
 
-        this.content.innerHTML = markup;
+        this.blocks.forEach(b => {
+            this.content.appendChild(b.getInterface());
+        });
     }
 
     initActionsPanel() {
@@ -27,7 +27,7 @@ class Edita {
 
         var addButton = document.createElement('button');
         addButton.textContent = '+';
-        addButton.addEventListener('click', function() {
+        addButton.addEventListener('click', () => {
             var block = new Block;
             self.addBlock(block);
         });
