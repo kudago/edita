@@ -3,15 +3,16 @@ const domify = require('domify');
 
 class Text extends Block {
     createSpeciticElement() {
-        this.element = domify(`
+        return domify(`
             <textarea>${this.value}</textarea>
         `);
+    }
 
-        this.element.addEventListener('input', () => {
-            this.value = this.element.value;
+    bindEvents() {
+        super.bindEvents();
+        this.events.bind({
+            'input textarea': e => this.value = e.target.value,
         });
-
-        return this.element;
     }
 }
 

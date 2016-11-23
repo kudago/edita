@@ -10,14 +10,12 @@ class Edita {
         this.element.appendChild(domify(`
             <div class="edita">
                 <button class="edita-add">+</button>
+                <div class="edita-content"></div>
             </div>
         `));
         this.bindEvents();
 
-        this.content = domify(`
-            <div class="edita-content"></div>
-        `);
-        this.element.appendChild(this.content);
+        this.content = document.querySelector('.edita-content', this.element);
         this.renderBlocks();
     }
 
@@ -29,6 +27,7 @@ class Edita {
     }
 
     renderBlocks() {
+        // virtualdom could be used here
         this.content.innerHTML = '';
 
         this.blocks.forEach(b => {
@@ -49,5 +48,6 @@ class Edita {
     }
 }
 
+// TODO: maybe remove this export
 window.Edita = Edita;
 module.exports = Edita;

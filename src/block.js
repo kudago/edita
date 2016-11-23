@@ -2,12 +2,18 @@ const domify = require('domify');
 const events = require('events-mixin');
 const EventsEmitter = require('events');
 
+/**
+ * Generic text editor container
+ */
 class Block extends EventsEmitter {
     constructor() {
         super();
 
         this.value = '';
         this.container = this.createContainer();
+        this.container.appendChild(
+            this.createSpeciticElement()
+        );
         this.bindEvents();
     }
 
@@ -20,25 +26,13 @@ class Block extends EventsEmitter {
             </div>
         `);
 
-        container.appendChild(this.createSpeciticElement());
-
         return container;
-    }
-
-    createSpeciticElement() {
-        // create element, specific for the block type
-        // should be implemented in subtypes
     }
 
     bindEvents() {
         this.events = events(this.container, this);
-
         this.events.bind({
             'click .edita-blockDelete': 'delete',
-        });
-        const textarea = this.container.children[0];
-        textarea.addEventListener('input', () => {
-            this.value = textarea.value;
         });
     }
 
@@ -48,6 +42,11 @@ class Block extends EventsEmitter {
 
     getContainer() {
         return this.container;
+    }
+
+    createSpeciticElement() {
+        // create element specific for the block type
+        // should be implemented in subtypes
     }
 }
 
