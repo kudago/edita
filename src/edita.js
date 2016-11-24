@@ -48,6 +48,8 @@ class Edita extends EventsEmitter {
 
     deleteBlock(block) {
         this.blocks = this.blocks.filter(b => b != block);
+        this.handleChange(block);
+        this.emit('delete');
         this.renderBlocks();
     }
 
