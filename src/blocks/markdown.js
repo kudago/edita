@@ -9,8 +9,9 @@ class Markdown extends Block {
                 element: textarea,
             });
 
-            this.simpleMDE.codemirror.on("change", () => {
+            this.simpleMDE.codemirror.on('change', () => {
                 this.value = this.simpleMDE.value();
+                this.emit('change', this.value);
             });
         });
 

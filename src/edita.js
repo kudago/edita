@@ -1,9 +1,12 @@
 const Markdown = require('./blocks/markdown');
 const domify = require('domify');
 const events = require('events-mixin');
+const EventsEmitter = require('events');
 
-class Edita {
+class Edita extends EventsEmitter {
     constructor(element, options) {
+        super();
+
         this.blocks = [];
         this.element = element;
 
@@ -38,6 +41,7 @@ class Edita {
     addBlock() {
         const block = new Markdown;
         block.on('delete', () => this.deleteBlock(block));
+        block.on('change', value => this.handleChange(block, value));
         this.blocks.push(block);
         this.renderBlocks();
     }
@@ -45,6 +49,14 @@ class Edita {
     deleteBlock(block) {
         this.blocks = this.blocks.filter(b => b != block);
         this.renderBlocks();
+    }
+
+    handleChange(block, value) {
+        this.emit('change', this.getValues());
+    }
+
+    getValues() {
+        return this.blocks.map(b => b.value);
     }
 }
 

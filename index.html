@@ -10,6 +10,7 @@
     <script>
         var div = document.querySelector('#edita');
         var edita = new Edita(div, {});
+        edita.on('change', data => console.dir(data));
     </script>
 </body>
 </html>
