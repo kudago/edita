@@ -12,7 +12,9 @@ class Edita extends EventsEmitter {
 
         this.element.appendChild(domify(`
             <div class="edita">
-                <button class="edita-add">+</button>
+                <div class="edita-actions">
+                    <button class="edita-add">+</button>
+                </div>
                 <div class="edita-content"></div>
             </div>
         `));

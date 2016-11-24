@@ -21,9 +21,11 @@ class Block extends EventsEmitter {
     createContainer() {
         const container = domify(`
             <div class="edita-block">
-                <button class="edita-blockDelete">
-                    Delete
-                </button>
+                <div class="edita-blockActions">
+                    <button class="edita-blockDelete">
+                        Delete
+                    </button>
+                </div>
             </div>
         `);
 
