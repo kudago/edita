@@ -45,6 +45,10 @@ class Block extends EventsEmitter {
         return this.container;
     }
 
+    getValue() {
+        return this.value;
+    }
+
     createSpeciticElement() {
         // create element specific for the block type
         // should be implemented in subtypes

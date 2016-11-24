@@ -56,7 +56,7 @@ class Edita extends EventsEmitter {
     }
 
     getValues() {
-        return this.blocks.map(b => b.value);
+        return this.blocks.map(b => b.getValue());
     }
 }
 
